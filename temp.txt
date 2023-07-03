@@ -1,0 +1,8 @@
+# Założenie projektu
+docker-compose run --rm app sh -c "django-admin startproject app ."
+
+# Uruchomienie dockera
+docker-compose up
+
+# Running tests
+docker-compose run --rm app sh -c "python manage.py test"
