@@ -1,8 +1,29 @@
 # Założenie projektu
 docker-compose run --rm app sh -c "django-admin startproject app ."
 
-# Uruchomienie dockera
+# Założenie app
+docker-compose run --rm app sh -c "python manage.py startapp core"
+
+# Uruchomienie dockera po buildzie
 docker-compose up
+
+# Usunięcie kontenera
+docker-compose down
+
+# Zbudowanie kontenera
+docker-compose build --no-cache
 
 # Running tests
 docker-compose run --rm app sh -c "python manage.py test"
+
+# Uruchomienie migracji
+docker-compose run --rm app sh -c "python manage.py makemigrations"
+
+# Uruchomienie komendy wait_for_db
+docker-compose run --rm app sh -c "python manage.py wait_for_db"
+
+# Uruchomienie komendy wait_for_db wraz z lintem (sprawdzeniem składni)
+docker-compose run --rm app sh -c "python manage.py wait_for_db && flake8"
+
+# Create superuser
+docker-compose run --rm app sh -c "python manage.py createsuperuser"
